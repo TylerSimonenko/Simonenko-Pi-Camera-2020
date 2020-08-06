@@ -3,6 +3,7 @@
 # Config file for download and integration onto system
 # ----------------------------------------------------- #
 
+import os
 from subprocess import call
 
 # To set begin/end dates and times - This will tell the system when to start and stop recording data
@@ -21,3 +22,12 @@ my_file = open('/home/wittypi/schedule.wpi')
 call('bash /home/wittypi/runScript.sh', shell=True)
 print('Schedule has been set.')  # (this can be removed later on)
 
+# Create "photos" and "videos" directories on USB stick
+storagePath = '/mnt/storageDevice/'
+photoDir = os.path.join(storagePath, "photos")
+videoDir = os.path.join(storagePath, "videos")
+if not os.path.exists(photoDir):
+    call('sudo mkdir ' + storagePath + 'photos', shell=True)
+if not os.path.exists(videoDir):
+    call('sudo mkdir ' + storagePath + 'videos', shell=True)
+print('The directories "photos" and "videos" have been added to the Storage Device.')
